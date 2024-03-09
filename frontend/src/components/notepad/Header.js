@@ -1,26 +1,59 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const styles = {
-  display: "flex",
-  justifyContent: "space-between",
-};
+function Header() {
+  const location = useLocation();
 
-function Header(props) {
   return (
-    <header>
-      <div style={styles}>
-        <h1 style={{ margin: 0 }}>Note Pad</h1>
-        <button
-          onClick={() => props.toggleDarkMode()}
-          style={{ alignSelf: "center" }}
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a
+          href="/"
+          class="d-inline-flex link-body-emphasis text-decoration-none"
         >
-          {props.darkMode ? "Dark Mode" : "Light Mode"}
+          <h1>PixelPen</h1>
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+          <a href="p" class="nav-link px-2 link-secondary">
+            Home
+          </a>
+        </li>
+        <li>
+          <Link
+            className={`nav-link ${
+              location.pathname === "/features" ? "active" : ""
+            }`}
+            to="features"
+          >
+            Features
+          </Link>
+        </li>
+        <li>
+          <a href="p" class="nav-link px-2">
+            Pricing
+          </a>
+        </li>
+        <li>
+          <a href="p" class="nav-link px-2">
+            FAQs
+          </a>
+        </li>
+        <li>
+          <a href="p" class="nav-link px-2">
+            About
+          </a>
+        </li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">
+          Login
         </button>
-        <button
-          onClick={() => props.displayNote()}
-          style={{ marginLeft: "auto" }}
-        >
-          Write
+        <button type="button" class="btn btn-primary">
+          Sign-up
         </button>
       </div>
     </header>
