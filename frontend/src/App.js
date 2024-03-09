@@ -3,6 +3,7 @@ import Header from "./components/notepad/Header";
 import Footer from "./components/notepad/Footer";
 import Note from "./components/notepad/Note";
 import CreateNote from "./components/notepad/CreateNote";
+import Login from "./components/Login";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className={darkMode ? "appDark" : "appLight"}>
+      <Login />
       {displayNotePad ? (
         <Header
           displayNote={displayNote}
