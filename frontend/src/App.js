@@ -5,6 +5,7 @@ import Footer from "./components/notepad/Footer";
 import Note from "./components/notepad/Note";
 import Features from "./components/notepad/Features";
 import CreateNote from "./components/notepad/CreateNote";
+import Login from "./components/Login";
 
 function App() {
   const [notes, setNotes] = useState([]);
