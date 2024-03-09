@@ -1,19 +1,13 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from "./components/notepad/Header";
 import Footer from "./components/notepad/Footer";
 import Note from "./components/notepad/Note";
+import Features from "./components/notepad/Features";
 import CreateNote from "./components/notepad/CreateNote";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [displayNotePad, setDisplayNotePad] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-  const displayNote = () => {
-    setDisplayNotePad((prevNote) => !prevNote);
-  };
   const addNote = (newNote) => {
     setNotes((prevNote) => {
       return [...prevNote, newNote];
@@ -28,16 +22,13 @@ function App() {
   };
 
   return (
-    <div className={darkMode ? "appDark" : "appLight"}>
-      {displayNotePad ? (
-        <Header
-          displayNote={displayNote}
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-        />
-      ) : (
-        <CreateNote onAdd={addNote} />
-      )}
+    <div>
+      <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/features" element={<Features/>}></Route>
+      </Routes>
+      <CreateNote onAdd={addNote}/>
       {notes.map((noteItem, index) => {
         return (
           <Note
@@ -50,6 +41,7 @@ function App() {
         );
       })}
       <Footer />
+      </BrowserRouter>
     </div>
   );
 }
