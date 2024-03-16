@@ -2,9 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import GoogleSignIn from "./GoogleSignIn";
+import { Link } from 'react-router-dom';
 
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,7 +32,7 @@ export default function Login() {
     <div>
       <div className="container mt-5">
         <div className="row">
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-4 offset-md-3">
             <form onSubmit={handleSubmit}>
               <input
                 type="email"
@@ -57,15 +58,14 @@ export default function Login() {
             }
               />
 
-              <button className="btn btn-primary" type="submit">
-                Submit
-              </button>
-            </form>
-            <h2>sign in with google</h2>
+            <Link className="btn btn-outline-success mx-2 text-black" to="/" role="button">Submit</Link>
             <GoogleSignIn />
+            </form>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default Login;
