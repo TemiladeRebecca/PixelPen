@@ -13,6 +13,22 @@ const GoogleSignIn = () => {
     }
   };
 
+  const buttonStyles = {
+    width: '400px', // Adjust width as needed
+    height: '40px', // Adjust height as needed
+    backgroundColor: '#4285f4', // Example background color
+    color: '#fff', // Example text color
+    borderRadius: '4px', // Example border radius
+    border: 'none', // Remove border if desired
+    cursor: 'pointer', // Add pointer cursor
+    fontSize: '16px', // Adjust font size as needed
+    fontWeight: 'bold', // Adjust font weight as needed
+    textAlign: 'center', // Center text
+    lineHeight: '40px', // Center vertically
+    // Add any other styles you want
+  };
+
+  
   return (
     <div>
       <GoogleLogin
@@ -21,6 +37,7 @@ const GoogleSignIn = () => {
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
+        style={{...buttonStyles}}
       />
     </div>
   );
