@@ -12,12 +12,14 @@ function About () {
     },
     one: {
       width: "250px",
-      height: '400px',
-      margin: '20px',
-      borderRadius: '10px',
-      transition: 'transform 0.3s ease-in',
-      backgroundColor: 'white',
-      cursor: 'pointer',
+      height: "400px",
+      margin: "20px",
+      borderRadius: "10px",
+      transition: "transform 0.3s ease-in",
+      backgroundColor: "beige",
+      cursor: "pointer",
+      textAlign: "center",
+      justifyContent: "center"
     },
     two: {
       width: "250px",
@@ -47,7 +49,7 @@ function About () {
       cursor: 'pointer',
     },
     "one:hover": {
-      boxShadow: "8px 8px 1px -5px rgba(0, 0, 0, 0.9)",
+      boxShadow: "2px 2px 4px 2px rgba(0, 0, 0, 0.5)",
       transition: "transform 0.3s linear",
       transform: "scale(1.1)",
     },
@@ -129,7 +131,7 @@ function About () {
   <div className="one" style={{...styles.one, ...(oneHovered && styles["one:hover"])}} 
       onMouseEnter={() => setOneHovered(true)}
       onMouseLeave={() => setOneHovered(false)}>
-    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/login" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Flexible</h5></div></Link>
+    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/login" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Reliable</h5><p style={{color: "black"}}>PixelPen is like having a digital extension of your brain. It help you capture everything important. Start with us today!</p></div></Link>
   </div>
   <div className="two" style={{...styles.two, ...(twoHovered && styles["two:hover"])}} 
       onMouseEnter={() => setTwoHovered(true)}

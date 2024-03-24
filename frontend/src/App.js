@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
 import NavBar from "./components/NavBar";
 import Todo from "./components/Todo List/Todo";
+import Notes from "./components/Notes/Notes";
 import Footer from "./components/Footer";
 
 
@@ -29,6 +30,9 @@ function App() {
         <Route path="/signup" element={<SignUp/>}></Route>
         <Route path="/signup/home" element={<Home/>}></Route>
         <Route path="/todo" element={<Todo/>}></Route>
+        <Route path="/todo/notes" element={<Notes/>}></Route>
+        <Route path="/notes" element={<Notes/>}></Route>
+        <Route path="/notes/todo" element={<Todo/>}></Route>
       </Routes>
       <Footer />
       </div>

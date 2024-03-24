@@ -1,75 +1,53 @@
 
 import { useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import GoogleSignIn from "./GoogleSignIn";
 import { Link } from 'react-router-dom';
-import image from "../../Images/work.jpg";
 
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(`/login`, {
-        email,
-        password,
-      });
+    const onChange = (e) => {
+      const {name, value} = e.target
+        setCredentials({ ...credentials, [name]: value });
+    };
 
-      if (data?.error) {
-        toast.error(data.error);
-      } else {
-        toast.success("Login successful");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Login failed. Try again.");
-    }
-  };
 
   return (
-    <div style={{display: "flex", margin: "0px"}}>
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="email"
-                className="form-control mb-4 p-2"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => {
-                        const {value} = e.target.value;
-                        setEmail(value);
-                    }
-                }
-              />
-
-              <input
-                type="password"
-                className="form-control mb-4 p-2"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => {
-                    const {value} = e.target.value;
-                    setPassword(value);
-                }
-            }
-              />
-
-            <Link className="btn btn-outline-success mx-2 text-black" to="/" role="button">Submit</Link>
-            </form>
-            <GoogleSignIn />
-          </div>
+    <div className="container" style={{ marginBottom: "20%" }}>
+            <div className="row justify-content-center mt-5">
+                <div className="col-md-4">
+                    <div className="card" style={{ color: "black", border: '1px solid grey', borderRadius: '10px', height: "450px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)" }}>
+                        <div className="card-body">
+                            <h4 className="card-title text-center mb-4">PixelPen</h4>
+                            <form>
+                                <div className="form-group" style={{margin: "20px"}}>
+                                    <input type="email" className="form-control" placeholder="Enter email" name="email" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
+                                </div>
+                                <div className="form-group mt-2" style={{margin: "20px"}}>
+                                    <input type="password" className="form-control" placeholder="Enter password" name="password" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
+                                </div>
+                                <div className="form-check text-start my-3" style={{ display: "flex", justifyContent: "center", alignSelf: "center", margin: "20px"}}>
+                                    <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault"></input>
+                                    <label className="form-check-label" htmlFor="flexCheckDefault" style={{marginLeft: "5px"}}>
+                                         Remember me
+                                    </label>
+                                </div>
+                                <div style={{marginLeft: "12px"}}>
+                                    <div style={{display: "flex", justifyContent: "center", alignSelf: "center"}}>
+                                        <Link className="btn btn-success mx-4 text-black btn-block mt-2" to="/" role="button" style={{width: "100px"}}>Login</Link>
+                                    </div>
+                                    <div style={{display: "flex", justifyContent: "center", alignSelf: "center", marginTop: "10px"}}>
+                                    <p>or</p>
+                                    </div>
+                                    <GoogleSignIn />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div className="col-6 col-sm-8 col-lg-6" style={{margin: "0px"}}>
-        <img src={image} className="d-block mx-lg-auto img-fluid" alt="PIC" width="500" height="500" loading="lazy" />
-      </div>  
-    </div>
   );
 }
 

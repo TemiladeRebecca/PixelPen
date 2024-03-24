@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import {Link} from "react-router-dom"
 
 
 function Todo () {
@@ -40,10 +41,14 @@ function Todo () {
   }
 
   const [showTask, setShowTask] = useState(false);
+  const [taskList, setTaskList] = useState([])
+  const [showTaskList, setShowTaskList] = useState(false)
   const [createNewNotes, setCreateNewNotes] = useState({
-    title: "",
-    content: "",
+    task: "",
+    description: "",
   });
+   
+  
   function handleChange(event) {
     const { name, value } = event.target;
     setCreateNewNotes((prevValue) => ({ ...prevValue, [name]: value }));
@@ -52,15 +57,29 @@ function Todo () {
   function handleTask() {
     setShowTask((prevValue) => !prevValue
   );
+  setShowTaskList(false);
 }
 
-  function addNote(event) {
-    setCreateNewNotes({
-      title: "",
-      content: "",
+function addTodo(event) {
+  setTaskList((prevValue) => [...prevValue, createNewNotes]);
+  setCreateNewNotes({
+    task: "",
+    description: "",
+  });
+  event.preventDefault();
+}
+ function addList () {
+  setShowTaskList((prevValue) => !prevValue)
+ }
+
+ function handleDelete(id) {
+  setTaskList(prevValue => {
+    return prevValue.filter((title, index) => {
+      return index !== id
     });
-    event.preventDefault();
-  }
+  });
+}
+ 
     return (
       <div style={{display: "flex", marginBottom: "20%"}}>
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "230px", marginRight: "10px"}}>
@@ -78,10 +97,12 @@ function Todo () {
     </div>
     <ul className="nav nav-pills flex-column mb-auto">
       <li className="nav-item">
-        <button className="btn text-black btn-block mt-3" onClick={handleTask}>Add Task</button>
+        <div style={{marginLeft: "5px"}}>
+        <button className="btn text-black btn-block mt-3" onClick={handleTask}>Add Tasks</button>
+        </div>
       </li>
       <li>
-        <a href="p" class="nav-link link-body-emphasis">
+        <a href="p" className="nav-link link-body-emphasis">
           
           Search
         </a>
@@ -92,16 +113,14 @@ function Todo () {
         </a>
       </li>
       <li>
-        <a href="p" className="nav-link link-body-emphasis">
-          
-          Upcoming
-        </a>
+        <div style={{margin: "-10px 0 0 5px"}}>
+        <button className="btn text-black btn-block mt-3" onClick={addList} >Tasks</button>
+        </div>
       </li>
       <li>
-        <a href="p" className="nav-link link-body-emphasis">
-
-          Filters
-        </a>
+        <div style={{margin: "-10px 0 0 5px"}}>
+          <Link className="btn text-black btn-block mt-3" to="./notes" role="button">Create Note</Link>
+        </div>
       </li>
     </ul>
   </div>
@@ -110,25 +129,37 @@ function Todo () {
       <form className="form" style={styles.form}>
         <input
           onChange={handleChange}
-          name="title"
-          placeholder="Task name"
-          value={createNewNotes.title}
+          name="task"
+          placeholder="Task"
+          value={createNewNotes.task}
           style={styles.input}
         />
         <textarea
           onChange={handleChange}
-          name="content"
+          name="description"
           placeholder="Description..."
-          value={createNewNotes.content}
+          value={createNewNotes.description}
           rows="3"
           style={styles.textarea}
         />
         <div style={{marginLeft: "170px"}}>
-          <button className="btn btn-success mx-2 text-black btn-block mt-3"  onClick={addNote}>Add Task</button>
+          <button className="btn btn-success mx-2 text-black btn-block mt-3"  onClick={addTodo}>Add Task</button>
           <button className="btn btn-secondary mx-2 text-black btn-block mt-3" onClick={handleTask}>Cancel</button>
         </div>
       </form>
     </div>}
+
+    {showTaskList &&
+    <div style={{ width: "100%", height: "100vh"}}>
+    <h5 style={{marginLeft: "50px"}}>Task List</h5>
+      {taskList.map((title, index) => (
+        <div key={index} id={index} style={{...styles.form, width: "300px", height: "100px"}}>
+          <div>{title.task}</div>
+          <div>{title.description}</div>
+          <div style={{marginLeft: "180px"}}><button className="btn btn-danger mx-2 text-black btn-block mt-3" onClick={() => handleDelete(index)}>Delete</button></div>
+        </div>
+      ))}
+  </div> }
      
   </div>
 

@@ -1,48 +1,33 @@
-import React, { useState } from 'react';
-import {Link} from "react-router-dom";
-import GoogleSignIn from "./GoogleSignIn";
-
-const SignUp = () => {
-    
-    const [credentials, setCredentials] = useState({ email: '', password: '' });
-    
+import React from 'react';
 
 
-    const onChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    };
+function SignUp () {
 
     return (
-        <div className="container" style={{ marginBottom: "20%" }}>
-            <div className="row justify-content-center mt-5">
-                <div className="col-md-4">
-                    <div className="card" style={{ color: "black", border: '1px solid grey', borderRadius: '10px', height: "450px" }}>
-                        <div className="card-body">
-                            <h4 className="card-title text-center mb-4">PixelPen</h4>
-                            <form>
-                                <div className="form-group" style={{margin: "20px"}}>
-                                    <input type="email" className="form-control" placeholder="Enter email" name="email" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
-                                </div>
-                                <div className="form-group mt-2" style={{margin: "20px"}}>
-                                    <input type="password" className="form-control" placeholder="Enter password" name="password" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
-                                </div>
-                                <div class="form-check text-start my-3" style={{justifyContent: "center", alignSelf: "center", marginLeft: "20px"}}>
-                                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault"></input>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                         Remember me
-                                    </label>
-                                </div>
-                                <div style={{marginLeft: "20px"}}>
-                                    <Link className="btn btn-success mx-2 text-black btn-block mt-3" to="/" role="button" style={{ borderRadius: '10px', width: "120px", marginBottom: "10px"}}>Login</Link>
-                                    <p style={{marginLeft: "50px", marginBottom: "5px"}}>or</p>
-                                    <GoogleSignIn />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="row align-items-center g-lg-5 py-5" style={{marginBottom: "20%",}}>
+      <div class="col-lg-6 text-center text-lg-start" style={{margin: "50px"}}>
+        <h1 class="display-4 lh-1 text-body-emphasis mb-3">Vertically centered hero sign-up form</h1>
+        <p class="col-lg-8 fs-5">Below is an example form built entirely with Bootstrap form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-4">
+        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"></input>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"></input>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm password"></input>
+            <label for="floatingPassword">Confirm Password</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+        </form>
+      </div>
+    </div>
     );
 };
 
