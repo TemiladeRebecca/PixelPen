@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import image from "../Images/work.jpg";
 
 function About () {
   const [oneHovered, setOneHovered] = useState(false);
@@ -16,40 +17,46 @@ function About () {
       margin: "20px",
       borderRadius: "10px",
       transition: "transform 0.3s ease-in",
-      backgroundColor: "beige",
       cursor: "pointer",
       textAlign: "center",
       justifyContent: "center"
     },
+
     two: {
       width: "250px",
       height: "400px",
       margin: "20px",
       borderRadius: "10px",
       transition: "transform 0.3s linear",
-      backgroundColor: "white",
       cursor: "pointer",
+      textAlign: "center",
+      justifyContent: "center",
     },
+
     three: {
       width: "250px",
       height: "400px",
       margin: "20px",
       borderRadius: "10px",
       transition: "transform 0.3s linear",
-      backgroundColor: "white",
       cursor: "pointer",
+      textAlign: "center",
+      justifyContent: "center",
     },
+
     four: {
       width: "250px",
       height: '400px',
       margin: '20px',
       borderRadius: '10px',
       transition: 'transform 0.3s ease-in',
-      backgroundColor: 'white',
       cursor: 'pointer',
+      textAlign: "center",
+      justifyContent: "center",
     },
+
     "one:hover": {
-      boxShadow: "2px 2px 4px 2px rgba(0, 0, 0, 0.5)",
+      boxShadow: "8px 8px 1px -5px rgba(0, 0, 0, 0.9)",
       transition: "transform 0.3s linear",
       transform: "scale(1.1)",
     },
@@ -131,24 +138,39 @@ function About () {
   <div className="one" style={{...styles.one, ...(oneHovered && styles["one:hover"])}} 
       onMouseEnter={() => setOneHovered(true)}
       onMouseLeave={() => setOneHovered(false)}>
-    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/login" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Reliable</h5><p style={{color: "black"}}>PixelPen is like having a digital extension of your brain. It help you capture everything important. Start with us today!</p></div></Link>
+    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/login" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Reliable</h5><p style={{color: "black"}}>PixelPen is like having a digital extension of your brain. It helps you capture everything important. <span style={{color: "blue"}}>Start with us today!</span></p></div></Link>
   </div>
   <div className="two" style={{...styles.two, ...(twoHovered && styles["two:hover"])}} 
       onMouseEnter={() => setTwoHovered(true)}
       onMouseLeave={() => setTwoHovered(false)}>
-    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Flexible</h5></div></Link>
+    <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Organized</h5><p style={{color: "black"}}>Capture everything important and access it on your devices. Feel the calm of being more organized. <span style={{color: "blue"}}>Contact us</span></p></div></Link>
   </div>
   <div className="three" style={{...styles.three, ...(threeHovered && styles["three:hover"])}} 
       onMouseEnter={() => setThreeHovered(true)}
       onMouseLeave={() => setThreeHovered(false)}>
-  <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/contact" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Flexible</h5></div></Link>
+  <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/notes" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Accessible</h5><p style={{color: "black"}}>Writing down your thought is like putting a leash on a wild idea. Explore PixelPen and <span style={{color: "blue"}}>discover note taking</span></p></div></Link>
   </div>
   <div className="four" style={{...styles.four, ...(fourHovered && styles["four:hover"])}} 
       onMouseEnter={() => setFourHovered(true)}
       onMouseLeave={() => setFourHovered(false)}>
-  <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/todo" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Flexible</h5></div></Link>
+  <Link className="flex h-full max-w-[260px] flex-col justify-between rounded-lg border border-black p-8 md:max-w-[310px] undefined transition-shadow ease-in-out hover:-translate-y-px hover:shadow-button" to="/todo" style={{...combinedStyles, textDecoration: "none"}}><div><h5 className="headline headline--5 mb-2 font-semibold text-black">Task management</h5><p style={{color: "black"}}>The palest ink is better than the best memory. Utilize our <span style={{color: "blue"}}>todo list feature</span> for better task management</p></div></Link>
   </div>
-  </div> 
+  </div>
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src={image} class="d-block mx-lg-auto img-fluid" alt="PIC" width="700" height="500" loading="lazy" />
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
+        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        </div>
+      </div>
+    </div>
+  </div>
       </div>
     
     );
