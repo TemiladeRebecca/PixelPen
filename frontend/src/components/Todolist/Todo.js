@@ -43,7 +43,7 @@ function Todo () {
   const [showTask, setShowTask] = useState(false);
   const [taskList, setTaskList] = useState([])
   const [showTaskList, setShowTaskList] = useState(false)
-  const [createNewNotes, setCreateNewNotes] = useState({
+  const [createNewList, setCreateNewList] = useState({
     task: "",
     description: "",
   });
@@ -51,7 +51,7 @@ function Todo () {
   
   function handleChange(event) {
     const { name, value } = event.target;
-    setCreateNewNotes((prevValue) => ({ ...prevValue, [name]: value }));
+    setCreateNewList((prevValue) => ({ ...prevValue, [name]: value }));
   }
 
   function handleTask() {
@@ -61,8 +61,8 @@ function Todo () {
 }
 
 function addTodo(event) {
-  setTaskList((prevValue) => [...prevValue, createNewNotes]);
-  setCreateNewNotes({
+  setTaskList((prevValue) => [...prevValue, createNewList]);
+  setCreateNewList({
     task: "",
     description: "",
   });
@@ -82,13 +82,13 @@ function addTodo(event) {
  
     return (
       <div style={{display: "flex", marginBottom: "20%"}}>
-        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "230px", marginRight: "10px"}}>
+        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-white" style={{width: "230px", marginRight: "10px"}}>
           <div className="dropdown">
       <a href="p" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <span>temilade.rebecca20</span><i class="bi bi-bell"></i>
       </a>
       <ul className="dropdown-menu text-small shadow">
-        <li><a className="dropdown-item" href="p">New project...</a></li>
+        <li><button className="dropdown-item" onClick={handleTask}>New task...</button></li>
         <li><a className="dropdown-item" href="p">Settings</a></li>
         <li><a className="dropdown-item" href="p">Profile</a></li>
         <li><hr className="dropdown-divider"></hr></li>
@@ -131,14 +131,14 @@ function addTodo(event) {
           onChange={handleChange}
           name="task"
           placeholder="Task"
-          value={createNewNotes.task}
+          value={createNewList.task}
           style={styles.input}
         />
         <textarea
           onChange={handleChange}
           name="description"
           placeholder="Description..."
-          value={createNewNotes.description}
+          value={createNewList.description}
           rows="3"
           style={styles.textarea}
         />
@@ -153,10 +153,10 @@ function addTodo(event) {
     <div style={{ width: "100%", height: "100vh"}}>
     <h5 style={{marginLeft: "50px"}}>Task List</h5>
       {taskList.map((title, index) => (
-        <div key={index} id={index} style={{...styles.form, width: "300px", height: "200px"}}>
+        <div key={index} id={index} style={{...styles.form, width: "300px", height: "150px"}}>
           <div>{title.task}</div>
           <div>{title.description}</div>
-          <div style={{marginLeft: "180px"}}><button className="btn btn-danger mx-2 text-black btn-block mt-3" onClick={() => handleDelete(index)}>Delete</button></div>
+          <div style={{margin: "70px 0 0 220px"}}><button className="btn btn-sm btn-outline-danger me-2" onClick={() => handleDelete(index)}><i className="fas fa-edit"></i></button></div>
         </div>
       ))}
   </div> }
