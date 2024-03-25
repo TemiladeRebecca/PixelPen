@@ -1,6 +1,6 @@
 # PixelPen
 
-Welcome to the PixelPen Notepad App! This simple yet powerful application allows you to take notes, organize your thoughts, and stay organized. It also provides a Todo feature to manage tasks and schedules.
+Welcome to PixelPen Notepad App! This simple yet powerful application allows you to take notes, organize your thoughts, and stay organized. It also provides a Todo feature to manage tasks and schedules.
 
 ## Table of Content
 * [Environment](#environment)
