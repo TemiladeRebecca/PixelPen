@@ -58,7 +58,7 @@ No known bugs at this time.
 
 ## Feedback and Support
 
-If you have any questions, feedback, or need support, please don't hesitate to [contact us](temilade.rebecca20@gmail.com). We're here to help!
+If you have any questions, feedback, or need support, please don't hesitate to [contact us](https://github.com/TemiladeRebecca). We're here to help!
 
 ## License
 
