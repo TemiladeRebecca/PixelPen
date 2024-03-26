@@ -45,6 +45,7 @@ function Todo () {
   const [taskList, setTaskList] = useState([]);
   const [showTaskList, setShowTaskList] = useState(false);
   const [showPriority, setShowPriority] = useState("Priority");
+  const [tagColor, setTagcolor] = useState("#000000");
   const [createNewList, setCreateNewList] = useState({
     task: "",
     description: "",
@@ -63,14 +64,30 @@ function Todo () {
 }
 
 function addTodo(event) {
-  setTaskList((prevValue) => [...prevValue, createNewList]);
+  // Create a new task object with task, description, tagColor, and priority properties
+  const newTask = {
+    task: createNewList.task,
+    description: createNewList.description,
+    tagColor: tagColor,
+  };
+
+  // Update the task list with the new task object
+  setTaskList((prevValue) => [...prevValue, newTask]);
+
+  // Clear the input fields
   setCreateNewList({
     task: "",
     description: "",
   });
+
+  // Reset the priority and tag color
   setShowPriority("Priority");
+  setTagcolor("#000000");
+
+  // Prevent the default form submission behavior
   event.preventDefault();
 }
+
  function addList () {
   setShowTaskList((prevValue) => !prevValue)
  }
@@ -83,21 +100,25 @@ function addTodo(event) {
   });
 }
   function handlePriority1 (event) {
+    setTagcolor("#FF0000");
     setShowPriority("P1");
     event.preventDefault();
   }
 
   function handlePriority2 (event) {
+    setTagcolor("#FFFF33");
     setShowPriority("P2");
     event.preventDefault();
   }
 
   function handlePriority3 (event) {
+    setTagcolor("#0000CC");
     setShowPriority("P3");
     event.preventDefault();
   }
 
   function handlePriority4 (event) {
+    setTagcolor("#000000");
     setShowPriority("P4");
     event.preventDefault();
   }
@@ -106,7 +127,7 @@ function addTodo(event) {
       <div style={{display: "flex", marginBottom: "20%"}}>
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-white" style={{width: "230px", marginRight: "10px"}}>
           <div className="dropdown">
-      <a href="p" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <a href="p" className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <span>temilade.rebecca20</span><i class="bi bi-bell"></i>
       </a>
       <ul className="dropdown-menu text-small shadow">
@@ -170,10 +191,10 @@ function addTodo(event) {
             <span>{showPriority}</span>
           </button>
             <ul className="dropdown-menu text-small shadow">
-              <li><button className="dropdown-item" onClick={handlePriority1}>Priority 1</button></li>
-              <li><button className="dropdown-item" onClick={handlePriority2}>Priority 2</button></li>
-              <li><button className="dropdown-item" onClick={handlePriority3}>Priority 3</button></li>
-              <li><button className="dropdown-item" onClick={handlePriority4}>Priority 4</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority1}><button className="btn btn-sm me-2" style={{backgroundColor: "#FF0000"}}></button>Priority 1</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority2}><button className="btn btn-sm me-2" style={{backgroundColor: "#FFFF33"}}></button>Priority 2</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority3}><button className="btn btn-sm me-2" style={{backgroundColor: "#0000CC"}}></button>Priority 3</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority4}><button className="btn btn-sm me-2" style={{backgroundColor: "#000000"}}></button>Priority 4</button></li>
             </ul>
         </div>
         <div style={{margin: "-30px 0 0 390px"}}>
@@ -188,7 +209,7 @@ function addTodo(event) {
     <h5 style={{marginLeft: "50px", fontFamily: 'Times New Roman, serif'}}>Task List</h5>
       {taskList.map((title, index) => (
         <div key={index} id={index} style={{...styles.form, width: "300px", height: "200px"}}>
-          <div>{title.task}</div>
+          <div><button className="btn btn-sm me-2" style={{backgroundColor: title.tagColor}}></button>{title.task}</div>
           <div>{title.description}</div>
           <div style={{margin: "80px 0 0 200px"}}><button className="btn btn-danger btn-sm mx-2 text-black btn-block mt-3" onClick={() => handleDelete(index)}>Delete</button></div>
         </div>
