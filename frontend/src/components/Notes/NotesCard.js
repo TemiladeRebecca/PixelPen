@@ -5,6 +5,9 @@ export default function Note() {
     const [showNote, setshowNote] = useState(false);
     const [color, setColor] = useState(null);
     const [textColor, setTextColor] = useState('#808080');
+    const [showTag, setShowTag] = useState("Select a tag");
+    const [showInputText, setShowInputText] = useState(false);
+    const [inputValue, setInputValue] = useState({input: ""});
     const [createNewNote, setCreateNewNote] = useState({
       title: "",
       description: ""
@@ -83,8 +86,30 @@ export default function Note() {
       const { name, value } = event.target;
       setCreateNewNote((prevValue) =>  ({...prevValue, [name] : value}));
     }
-    
 
+    function handleTagShopping () {
+      setShowTag("Shopping");
+    }
+
+    function handleTagWork () {
+      setShowTag("Work");
+    }
+
+    function handleTagPersonal () {
+      setShowTag("Personal");
+    }
+
+    function inputChange (event) {
+      const { value} = event.target;
+      setShowTag(value); // Update showTag with the input value
+      setInputValue({ input: value }); // Update inputValue state
+    }
+
+    function handleShowInputText () {
+      setShowInputText((prevValue) => !prevValue);
+      setInputValue({input: ""});
+    }
+    
     return (
         <div style={{ display: "flex", marginBottom: "20%"}}>
           <div className="d-flex flex-column flex-shrink-0 p-3" style={{width: "230px", backgroundColor: "white"}}>
@@ -93,7 +118,7 @@ export default function Note() {
         <span>temilade.rebecca20</span><i class="bi bi-bell"></i>
       </a>
       <ul className="dropdown-menu text-small shadow">
-        <li><a className="dropdown-item" href="p">New project...</a></li>
+        <li><button className="dropdown-item" onClick={handleNotes}>New note...</button></li>
         <li><a className="dropdown-item" href="p">Settings</a></li>
         <li><a className="dropdown-item" href="p">Profile</a></li>
         <li><hr className="dropdown-divider"></hr></li>
@@ -154,9 +179,28 @@ export default function Note() {
                       </form>
                     </div>
                     <div>
-                        <p className="card-text mb-1 mt-2"><small><strong>Tag:</strong>Urgent</small></p>
+                    <hr className="mt-2 mb-3"/>
+                    <div className="dropdown">
+                      <button className="d-flex align-items-center text-decoration-none dropdown-toggle btn text-black btn-block mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>{showTag}</span>
+                      </button>
+                        <ul className="dropdown-menu text-small shadow">
+                          <li><button className="dropdown-item" onClick={handleTagShopping}>Shopping</button></li>
+                          <li><button className="dropdown-item" onClick={handleTagWork}>Work</button></li>
+                          <li><button className="dropdown-item" onClick={handleTagPersonal}>Personal</button></li>
+                          <li>
+                          <button className="dropdown-item" onClick={handleShowInputText}>Others...</button>
+                          {showInputText && (
+                          <li>
+                          <input onChange={inputChange} name="input" value={inputValue.input}/>
+                          </li>
+                          )}
+                          </li>
+                        </ul>
+                    </div>
+
                         <div className="d-flex justify-content-end">
-                            <button className="btn btn-sm btn-outline-danger me-2" >
+                            <button className="btn btn-sm btn-outline-danger me-2" onClick={handleNotes}>
                                 <i className="fas fa-trash-alt"></i>
                             </button>
                             <button className="btn btn-sm btn-outline-primary">
