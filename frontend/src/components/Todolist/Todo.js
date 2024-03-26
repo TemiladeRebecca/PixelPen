@@ -13,7 +13,8 @@ function Todo () {
     },
     form: {
       position: 'relative',
-      width: '400px',
+      width: '600px',
+      height: '250px',
       margin: '30px auto 20px 50px',
       background: '#fff',
       padding: '15px',
@@ -41,8 +42,9 @@ function Todo () {
   }
 
   const [showTask, setShowTask] = useState(false);
-  const [taskList, setTaskList] = useState([])
-  const [showTaskList, setShowTaskList] = useState(false)
+  const [taskList, setTaskList] = useState([]);
+  const [showTaskList, setShowTaskList] = useState(false);
+  const [showPriority, setShowPriority] = useState("Priority");
   const [createNewList, setCreateNewList] = useState({
     task: "",
     description: "",
@@ -66,6 +68,7 @@ function addTodo(event) {
     task: "",
     description: "",
   });
+  setShowPriority("Priority");
   event.preventDefault();
 }
  function addList () {
@@ -79,6 +82,25 @@ function addTodo(event) {
     });
   });
 }
+  function handlePriority1 (event) {
+    setShowPriority("P1");
+    event.preventDefault();
+  }
+
+  function handlePriority2 (event) {
+    setShowPriority("P2");
+    event.preventDefault();
+  }
+
+  function handlePriority3 (event) {
+    setShowPriority("P3");
+    event.preventDefault();
+  }
+
+  function handlePriority4 (event) {
+    setShowPriority("P4");
+    event.preventDefault();
+  }
  
     return (
       <div style={{display: "flex", marginBottom: "20%"}}>
@@ -142,21 +164,33 @@ function addTodo(event) {
           rows="3"
           style={styles.textarea}
         />
-        <div style={{marginLeft: "170px"}}>
-          <button className="btn btn-success mx-2 text-black btn-block mt-3"  onClick={addTodo}>Add Task</button>
-          <button className="btn btn-secondary mx-2 text-black btn-block mt-3" onClick={handleTask}>Cancel</button>
+        <hr className="mt-2 mb-3" style={{marginTop: "100px"}}/>
+        <div className="dropdown" style={{marginTop: "20px"}}>
+          <button className="d-flex align-items-center text-decoration-none dropdown-toggle btn text-black btn-block mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>{showPriority}</span>
+          </button>
+            <ul className="dropdown-menu text-small shadow">
+              <li><button className="dropdown-item" onClick={handlePriority1}>Priority 1</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority2}>Priority 2</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority3}>Priority 3</button></li>
+              <li><button className="dropdown-item" onClick={handlePriority4}>Priority 4</button></li>
+            </ul>
+        </div>
+        <div style={{margin: "-30px 0 0 390px"}}>
+          <button className="btn btn-success btn-sm mx-2 text-black btn-block mt-3"  onClick={addTodo}>Add Task</button>
+          <button className="btn btn-secondary btn-sm mx-2 text-black btn-block mt-3" onClick={handleTask}>Cancel</button>
         </div>
       </form>
     </div>}
 
     {showTaskList &&
     <div style={{ width: "100%", height: "100vh"}}>
-    <h5 style={{marginLeft: "50px"}}>Task List</h5>
+    <h5 style={{marginLeft: "50px", fontFamily: 'Times New Roman, serif'}}>Task List</h5>
       {taskList.map((title, index) => (
-        <div key={index} id={index} style={{...styles.form, width: "300px", height: "150px"}}>
+        <div key={index} id={index} style={{...styles.form, width: "300px", height: "200px"}}>
           <div>{title.task}</div>
           <div>{title.description}</div>
-          <div style={{margin: "70px 0 0 220px"}}><button className="btn btn-sm btn-outline-danger me-2" onClick={() => handleDelete(index)}><i className="fas fa-edit"></i></button></div>
+          <div style={{margin: "80px 0 0 200px"}}><button className="btn btn-danger btn-sm mx-2 text-black btn-block mt-3" onClick={() => handleDelete(index)}>Delete</button></div>
         </div>
       ))}
   </div> }
