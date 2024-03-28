@@ -11,8 +11,6 @@ import Note from "./components/Notes/NotesCard";
 import Footer from "./components/Footer";
 
 
-
-
 function App() {
 
   const [backgroundColor, setbackgroundColor] = useState();
