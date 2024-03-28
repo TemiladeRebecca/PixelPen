@@ -44,6 +44,9 @@ To run the Notepad App locally on your machine, follow these steps:
 4. Start the development server with `npm start`.
 5. Open your web browser and visit `http://localhost:3000` to view the app.
 
+## Overview
+![Note Page](frontend/src/Images/note_page.png)
+
 ## Contribution
 
 Contributions are welcome! If you'd like to contribute to the PixelPen App, please follow these guidelines:
