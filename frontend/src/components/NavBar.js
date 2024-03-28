@@ -33,7 +33,7 @@ function NavBar () {
           <li>
             <Link
               className={`nav-link ${location.pathname === '/notes' ? 'active' : ''}`} to="notes">
-                Take Notes
+                Notes
             </Link>
             </li>
             <li>
