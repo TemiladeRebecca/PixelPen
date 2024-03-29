@@ -1,15 +1,55 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
 
     const onChange = (e) => {
       const {name, value} = e.target
         setCredentials({ ...credentials, [name]: value });
     };
+
+  // Hardcoded user data
+const users = [
+  { email: 'user1@gmail.com', password: 'password1' },
+  { email: 'user2@gmail.com', password: 'password2' },
+  { email: 'user3@gmail.com', password: 'password3' },
+  { email: 'user4@gmail.com', password: 'password4' },
+  { email: 'user5@gmail.com', password: 'password5' },
+];
+
+// Function to validate user credentials
+function authenticateUser(email, password) {
+  // Check if the provided email and password from credentials match any user in the hardcoded data
+  const user = users.find((user) => user.email === email && user.password === password);
+  
+  // Return the user object if authentication is successful, otherwise return null
+  return user || null;
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  
+  const { email, password } = credentials;
+
+  // Deconstructure credentials pass it into authenticatUsers
+  // it checks against the user object
+  const authenticatedUser = authenticateUser(email, password);
+
+  if (authenticatedUser) {
+    console.log('Authentication successful. User:', authenticatedUser);
+    // Redirect or perform any action for authenticated users
+    navigate('/');
+    
+  } else {
+    console.log('Invalid email or password.');
+    // Handle authentication failure (e.g., display an error message)
+  }
+};
+
 
 
   return (
@@ -21,10 +61,10 @@ function Login() {
                             <h4 className="card-title text-center mb-4">PixelPen</h4>
                             <form>
                                 <div className="form-group" style={{margin: "20px"}}>
-                                    <input type="email" className="form-control" placeholder="Enter email" name="email" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
+                                    <input type="email" className="form-control" placeholder="Enter email" name="email" value={credentials.email} onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
                                 </div>
                                 <div className="form-group mt-2" style={{margin: "20px"}}>
-                                    <input type="password" className="form-control" placeholder="Enter password" name="password" onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
+                                    <input type="password" className="form-control" placeholder="Enter password" name="password" value={credentials.password} onChange={onChange} style={{ color: "grey", border: "1px solid grey", borderRadius: "10px", height: "50px" }} />
                                 </div>
                                 <div className="form-check text-start my-3" style={{ display: "flex", justifyContent: "center", alignSelf: "center", margin: "20px"}}>
                                     <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" style={{marginRight: "2px"}}></input>
@@ -34,17 +74,17 @@ function Login() {
                                 </div>
                                 <div style={{marginLeft: "12px"}}>
                                     <div style={{display: "flex", justifyContent: "center", alignSelf: "center"}}>
-                                        <Link className="btn btn-success mx-4 text-black btn-block mt-2" to="/" role="button" style={{width: "100px"}}>Login</Link>
+                                        <button className="btn btn-success mx-4 text-black btn-block mt-2" type="submit" onClick={handleSubmit} style={{width: "100px"}}>Login</button>
                                     </div>
-                                    <div style={{display: "flex", justifyContent: "center", alignSelf: "center"}}>
-                                        <small class="text-body-secondary">Dont have an account <a href="./signup">sign up</a></small>
+                                    <div style={{display: "flex", justifyContent: "center", alignSelf: "center", marginTop: "10px"}}>
+                                        <small className="text-body-secondary">Dont have an account <a href="./signup">sign up</a></small>
                                     </div>
                                     <hr className="mt-2 mb-3"/>
                                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                    <button class="gsi-material-button">
-                                      <div class="gsi-material-button-state"></div>
-                                      <div class="gsi-material-button-content-wrapper">
-                                      <div class="gsi-material-button-icon">
+                                    <button className="gsi-material-button">
+                                      <div className="gsi-material-button-state"></div>
+                                      <div className="gsi-material-button-content-wrapper">
+                                      <div className="gsi-material-button-icon">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style={{display: "block"}}>
                                           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
                                           <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
@@ -53,7 +93,7 @@ function Login() {
                                           <path fill="none" d="M0 0h48v48H0z"></path>
                                         </svg>
                                         </div>
-                                        <span class="gsi-material-button-contents">Sign in with Google</span>
+                                        <span className="gsi-material-button-contents">Sign in with Google</span>
                                         <span style={{display: "none"}}>Sign in with Google</span>
                                       </div>
                                     </button>
