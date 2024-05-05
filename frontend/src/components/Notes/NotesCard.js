@@ -14,6 +14,9 @@ export default function Note() {
     });
     const [createNoteItem, setCreateNoteItem] = useState([]);
     const [showNoteList, setShowNoteList] = useState(false);
+    const [editTitle, setEditTitle] = useState("");
+    const [editDescription, setEditDescription] = useState("");
+    const [editIndex, setEditIndex] = useState(null);
 
     useEffect(() => {
         const colors = [
@@ -156,6 +159,27 @@ export default function Note() {
       });
     }
 
+
+  function handleEditNoteClick(index) {
+    setEditIndex(index);
+    setEditTitle(createNoteItem[index].title);
+    setEditDescription(createNoteItem[index].description);
+  }
+  
+  function handleUpdateNote() {
+    setCreateNoteItem(prevValue => {
+      const updatedNotes = [...prevValue];
+      updatedNotes[editIndex] = {
+        ...updatedNotes[editIndex],
+        title: editTitle,
+        description: editDescription
+      };
+      return updatedNotes;
+    });
+    setEditIndex(null); // Reset editing mode
+  }
+  
+
     return (
         <div style={{ display: "flex", marginBottom: "20%"}}>
           <div className="d-flex flex-column flex-shrink-0 p-3" style={{width: "230px", backgroundColor: "white"}}>
@@ -258,21 +282,34 @@ export default function Note() {
       {showNoteList &&
       <div style={{marginLeft: "50px"}}>
         <h5 style={{fontFamily: 'Times New Roman, serif', justifyContent: "content", marginLeft: "100px"}}>Note List</h5>
-          {createNoteItem.map((note, index) => (
-            <div class="card" key={index} style={{width: "23rem"}}>
-            <div class="card-body" key={index}>
-              <h5 class="card-title">{note.noteDate}</h5>
-              <h6 class="card-subtitle mb-2 text-body-secondary">{note.title}</h6>
-              <p class="card-text">{note.description}</p>
-              <p className="card-text"><small><strong>Tag:</strong> {note.tag}</small></p>
-              <div className="d-flex justify-content-end">
-                <button className="btn btn-sm btn-outline-danger me-2" onClick={() => handleDeleteNote(index)}></button>
-                <button className="btn btn-sm btn-outline-primary"></button>
-              </div>   
-            </div>
-          </div>
-        ))}
-    </div>}    
+        {createNoteItem.map((note, index) => (
+  <div class="card" key={index} style={{width: "23rem"}}>
+    <div class="card-body" key={index}>
+      {editIndex === index ? ( // Render edit form if editing this note
+        <form onSubmit={handleUpdateNote}>
+          <input value={editTitle} onChange={e => setEditTitle(e.target.value)} />
+          <textarea value={editDescription} onChange={e => setEditDescription(e.target.value)} />
+          <button type="submit">Update</button>
+          <button type="button" onClick={() => setEditIndex(null)}>Cancel</button>
+        </form>
+      ) : ( // Render note details if not editing
+        <>
+          <h5 class="card-title">{note.noteDate}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{note.title}</h6>
+          <p class="card-text">{note.description}</p>
+          <p className="card-text"><small><strong>Tag:</strong> {note.tag}</small></p>
+          <div className="d-flex justify-content-end">
+            <button className="btn btn-sm btn-outline-danger me-2" onClick={() => handleDeleteNote(index)}>Delete</button>
+            <button className="btn btn-sm btn-outline-primary" onClick={() => handleEditNoteClick(index)}>Edit</button>
+          </div>   
+        </>
+      )}
+    </div>
+  </div>
+))}
+    </div>}   
   </div>
   );
 }
+
+
